@@ -9,39 +9,11 @@ const PORT = 3003;
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 
-
-let notes = [
-  {
-    id: uuidv4(),
-    title: "Nota 1",
-    content: "Contenido de la nota 1",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    tags: ["etiqueta1", "etiqueta2"]
-  },
-  {
-    id: uuidv4(),
-    title: "Nota 2",
-    content: "Contenido de la nota 2",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    tags: ["etiqueta3", "etiqueta4"]
-  },
-  {
-    id: uuidv4(),
-    title: "Nota 3",
-    content: "Contenido de la nota 3",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    tags: ["etiqueta5", "etiqueta6"]
-  }
-];
-
+let notes = [];
 
 app.get('/api/notes', (req, res) => {
   res.json(notes);
 });
-
 
 app.post('/api/notes', (req, res) => {
   const { title, content, tags } = req.body;
@@ -49,12 +21,37 @@ app.post('/api/notes', (req, res) => {
     id: uuidv4(),
     title,
     content,
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: new Date().toISOString(), 
+    updatedAt: new Date().toISOString(),  
     tags: tags || []
   };
   notes.push(newNote);
   res.status(201).json(newNote);
+});
+
+app.put('/api/notes/:id', (req, res) => {
+  const { id } = req.params;
+  const { title, content, tags } = req.body;
+  const noteIndex = notes.findIndex(note => note.id === id);
+  
+  if (noteIndex !== -1) {
+    notes[noteIndex] = {
+      ...notes[noteIndex],
+      title,
+      content,
+      tags: tags || notes[noteIndex].tags,
+      updatedAt: new Date().toISOString()  
+    };
+    res.json(notes[noteIndex]);
+  } else {
+    res.status(404).json({ message: 'Nota no encontrada' });
+  }
+});
+
+app.delete('/api/notes/:id', (req, res) => {
+  const { id } = req.params;
+  notes = notes.filter(note => note.id !== id);
+  res.status(204).send();  
 });
 
 app.get('/', (req, res) => {
