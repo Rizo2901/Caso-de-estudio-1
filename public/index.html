@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas App</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <header>
+        <i class="fas fa-sticky-note logo"></i>
+        <h1>Notas</h1>
+        <button id="add-note-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Agregar Nota
+        </button>
+    </header>
+    <div id="notes-list"></div>
+    
+    <!-- Modal de Bootstrap -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Nueva Nota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="note-form">
+                        <div class="mb-3">
+                            <label for="note-title" class="form-label">Título</label>
+                            <input type="text" class="form-control" id="note-title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="note-content" class="form-label">Contenido</label>
+                            <textarea class="form-control" id="note-content" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar Nota</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ 
+    
+
+   
+    <script src="public/form.js"></script>
+</body>
+</html>
