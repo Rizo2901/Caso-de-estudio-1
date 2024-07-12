@@ -8,6 +8,7 @@ body {
 header {
     display: flex;
     align-items: center;
+    justify-content: space-between; /* Alinea los elementos en fila y los separa */
     padding: 10px 20px;
     background-color: #4097c0;
     border-bottom: 1px solid #ddd;
@@ -16,7 +17,6 @@ header {
 header .logo {
     font-size: 30px; 
     color: azure;
-    margin-right: 20px; 
 }
 
 header h1 {
@@ -24,7 +24,7 @@ header h1 {
     font-size: 24px;
     color: azure;
     text-align: center;
-    flex-grow: 1; 
+    flex-grow: 1; /* Asegura que el título ocupe el espacio disponible */
 }
 
 header button {
@@ -44,3 +44,13 @@ header button:hover {
 #notes-list {
     padding: 20px;
 }
+.btn-trash {
+    background: none; /* Elimina el fondo del botón */
+    border: none; /* Elimina el borde del botón */
+    padding: 0; /* Elimina el padding */
+    color: #dc3545; /* Color del icono */
+    font-size: 1.5rem; /* Tamaño del icono */
+  }
+  .btn-trash:hover {
+    color: #a71d2a; /* Color del icono al pasar el ratón */
+  }
