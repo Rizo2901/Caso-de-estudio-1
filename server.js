@@ -15,14 +15,24 @@ app.get('/api/notes', (req, res) => {
   res.json(notes);
 });
 
+app.get('/api/notes/:id', (req, res) => {
+  const { id } = req.params;
+  const note = notes.find(note => note.id === id);
+  if (note) {
+    res.json(note);
+  } else {
+    res.status(404).json({ message: 'Nota no encontrada' });
+  }
+});
+
 app.post('/api/notes', (req, res) => {
   const { title, content, tags } = req.body;
   const newNote = {
     id: uuidv4(),
     title,
     content,
-    createdAt: new Date().toISOString(), 
-    updatedAt: new Date().toISOString(),  
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
     tags: tags || []
   };
   notes.push(newNote);
@@ -40,7 +50,7 @@ app.put('/api/notes/:id', (req, res) => {
       title,
       content,
       tags: tags || notes[noteIndex].tags,
-      updatedAt: new Date().toISOString()  
+      updatedAt: new Date().toISOString()
     };
     res.json(notes[noteIndex]);
   } else {
@@ -51,7 +61,7 @@ app.put('/api/notes/:id', (req, res) => {
 app.delete('/api/notes/:id', (req, res) => {
   const { id } = req.params;
   notes = notes.filter(note => note.id !== id);
-  res.status(204).send();  
+  res.status(204).send();
 });
 
 app.get('/', (req, res) => {
